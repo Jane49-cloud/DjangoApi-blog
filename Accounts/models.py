@@ -13,6 +13,7 @@ class UserAccountManager(BaseUserManager):
 
         user.set_password(password)
         user.save()
+        return user
 
     def create_superuser(self, email, name, password=None):
         user=user = self.create_user(email, name, password)
@@ -30,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=255)
     location = models.CharField(max_length=255, blank=True)
     bio =models.TextField(max_length=700, blank=True)
-    is_active=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
 
 
