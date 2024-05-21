@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import cloudinary_storage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     "cloudinary",
+    "cloudinary_storage",
     'djoser',
     'rest_framework',
     'Accounts'
@@ -77,6 +81,21 @@ DATABASES = {
        
     }
 }
+
+
+# cloudinary settings
+
+
+CLOUDINARY_STORAGE =    {
+
+    "CLOUD_NAME":'dbmt0nuvr',
+    "API_KEY" :'791899511471149',
+    "API_SECRET":'DByO36QLHnSPVEcWrbh-jEJG4U4'
+}
+
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE ='cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
