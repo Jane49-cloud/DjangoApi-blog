@@ -26,6 +26,7 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
     image=models.ImageField(upload_to='blog-post-image')
+    description = models.TextField(blank=True)
     
 
     def __str__(self):
