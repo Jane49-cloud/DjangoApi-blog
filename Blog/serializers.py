@@ -58,7 +58,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Blog
-        fields=[ 'title', 'id', 'author', 'created_at' 'category' 'description']
+        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published"]
 
     # this manipulates or allows related
     def __init__(self, *args, **kwargs):
@@ -68,10 +68,10 @@ class BlogSerializer(serializers.ModelSerializer):
 
 
 class BlogDetailSerializer(serializers.ModelSerializer):
-    comments =CommentSerializer(many=True,  readonly = True)
+    comments =CommentSerializer(many=True,read_only=True)
     class Meta:
         model=models.Blog
-        fields=[ 'title', 'id', 'author', 'created_at' 'category' 'description', 'comments']
+        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description', 'comments' , "published"]
 
     def __init__(self, *args, **kwargs):
         super(BlogDetailSerializer, self).__init__(*args, **kwargs)
@@ -80,5 +80,29 @@ class BlogDetailSerializer(serializers.ModelSerializer):
 
 
 
+#Category Serializers
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Category
+        fields='__all__'
+
+    # this manipulates or allows related
+    def __init__(self, *args, **kwargs):
+        super(CategorySerializer, self).__init__(*args, **kwargs)
+        # request =self.context.get('request')
+        self.Meta.depth =1 # depth means it will go  one level in the relative model
+
+
+class CategoryDetailSerializer(serializers.ModelSerializer):
+   
+    class Meta:
+        model=models.Category
+        fields='__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CategoryDetailSerializer, self).__init__(*args, **kwargs)
+        # request =self.context.get('request')
+        self.Meta.depth =1
 
 

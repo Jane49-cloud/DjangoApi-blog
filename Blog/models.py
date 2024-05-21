@@ -43,4 +43,4 @@ class Comment(models.Model):
     approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Comment by {self.author} on {self.blog}'
+        return f'Comment by {self.name} on {self.blog}'
