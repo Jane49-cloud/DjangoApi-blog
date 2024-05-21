@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     'djoser',
     'rest_framework',
-    'Accounts'
+    'Accounts',
+    'Blog'
 ]
 
 MIDDLEWARE = [
