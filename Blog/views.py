@@ -24,7 +24,7 @@ class AllBlogsListView(generics.ListAPIView):
     queryset = models.Blog.objects.filter()
 
 
-class BlogDetailsView(generics.RetrieveDestroyAPIView):
+class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=serializers.BlogDetailSerializer
     queryset = models.Blog.objects.filter(published=True)
 

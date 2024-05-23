@@ -78,7 +78,7 @@ class BlogDetailSerializer(serializers.ModelSerializer):
     comments =CommentSerializer(many=True,read_only=True)
     class Meta:
         model=models.Blog
-        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description', 'comments' , "published"]
+        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description', 'comments' , "published" ,'content']
 
     def __init__(self, *args, **kwargs):
         super(BlogDetailSerializer, self).__init__(*args, **kwargs)
