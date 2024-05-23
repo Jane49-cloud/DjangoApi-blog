@@ -5,6 +5,13 @@ from . import serializers, models
 
 
 
+class CreateBlogView(generics.CreateAPIView):
+    serializer_class = serializers.BlogSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 class BlogsListView(generics.ListAPIView):
     serializer_class=serializers.BlogSerializer
     queryset = models.Blog.objects.filter(published=True)
