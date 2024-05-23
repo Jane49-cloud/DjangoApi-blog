@@ -8,6 +8,7 @@ router.register(r'comments', views.CommentViewset)
 urlpatterns = [
 
     path("blogs" , views.BlogsListView.as_view()),
+    path("blogs/create" , views.CreateBlogView.as_view()),
     path("blogs/<int:pk>" , views.BlogDetailsView.as_view()),
     path("authors" , views.AuthorListView.as_view()),
     path("author/<int:pk>" , views.AuthorDetailsView.as_view()),
