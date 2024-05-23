@@ -59,7 +59,7 @@ class BlogSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all())
     class Meta:
         model=models.Blog
-        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published"]
+        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published" , "image"]
 
     # this manipulates or allows related
     def __init__(self, *args, **kwargs):
