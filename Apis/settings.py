@@ -1,6 +1,7 @@
 
 
 from pathlib import Path
+from datetime import timedelta
 
 import cloudinary_storage
 
@@ -29,7 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     "cloudinary",
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
+    "cloudinary",
     "cloudinary_storage",
     'djoser',
     'rest_framework',
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,6 +88,8 @@ DATABASES = {
     }
 }
 
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # cloudinary settings
 
@@ -130,6 +137,15 @@ EMAIL_HOST_PASSWORD = 'nwiplmtbfrwcyzoo '
 EMAIL_USE_TLS = True
 
 
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    'AUTH_TOKEN_CLASSES': (
+        'rest_framework_simplejwt.tokens.AccessToken'
+
+    )
+}
 
 DJOSER = {
     'LOGIN_FIELD': 'email',
