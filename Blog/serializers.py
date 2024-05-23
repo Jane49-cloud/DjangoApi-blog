@@ -56,6 +56,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
 #Blog Serializers
 
 class BlogSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all())
     class Meta:
         model=models.Blog
         fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published"]
@@ -65,6 +66,12 @@ class BlogSerializer(serializers.ModelSerializer):
         super(BlogSerializer, self).__init__(*args, **kwargs)
         # request =self.context.get('request')
         self.Meta.depth =1 # depth means it will go  one level in the relative model
+
+
+    def create(self, validated_data):
+        category = validated_data.pop('category')
+        blog = models.Blog.objects.create(category=category, **validated_data)
+        return blog
 
 
 class BlogDetailSerializer(serializers.ModelSerializer):

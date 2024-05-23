@@ -9,8 +9,11 @@ class CreateBlogView(generics.CreateAPIView):
     serializer_class = serializers.BlogSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        user = self.request.user
+        author, created = models.Author.objects.get_or_create(user=user)
+        serializer.save(author=author)
 
 class BlogsListView(generics.ListAPIView):
     serializer_class=serializers.BlogSerializer
