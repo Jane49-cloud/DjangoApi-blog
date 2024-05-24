@@ -35,7 +35,7 @@ class CategoryListView(generics.ListAPIView):
     queryset = models.Category.objects.all()
 
 
-class CategoryDetailsView(generics.RetrieveDestroyAPIView):
+class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=serializers.CategoryDetailSerializer
     queryset = models.Category.objects.all()
 
