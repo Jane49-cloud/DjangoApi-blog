@@ -60,6 +60,12 @@ class CommentDetailSerializer(serializers.ModelSerializer):
 
 
 #Category Serializers
+class categoryCreateSerializer(serializers.ModelSerializer): 
+    
+    class Meta:
+        model=models.Category
+        fields= ['name' ,'description', 'id']
+        
 
 class CategorySerializer(serializers.ModelSerializer):
     id = serializers.CharField(source='pk') 

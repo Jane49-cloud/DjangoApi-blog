@@ -30,6 +30,12 @@ class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+class CreateCategoryView(generics.CreateAPIView):
+    serializer_class = serializers.categoryCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+   
+
 class CategoryListView(generics.ListAPIView):
     serializer_class=serializers.CategorySerializer
     queryset = models.Category.objects.all()
