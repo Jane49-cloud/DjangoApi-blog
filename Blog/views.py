@@ -43,7 +43,14 @@ class CategoryListView(generics.ListAPIView):
 
 class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=serializers.CategoryDetailSerializer
+queryset = models.Category.objects.all()
+
+
+class UpdateCategoryView(generics.UpdateAPIView):
     queryset = models.Category.objects.all()
+    serializer_class =serializers.categoryCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    # lookup_field = 'id'
 
 
 class AuthorListView(generics.ListAPIView):

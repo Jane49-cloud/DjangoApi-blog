@@ -14,7 +14,9 @@ urlpatterns = [
     path("authors" , views.AuthorListView.as_view()),
     path("author/<int:pk>" , views.AuthorDetailsView.as_view()),
     path("categories" , views.CategoryListView.as_view()),
-     path("categories/create" , views.CreateCategoryView.as_view()),
+    path("categories/create" , views.CreateCategoryView.as_view()),
     path("category/<int:pk>" , views.CategoryDetailsView.as_view()),
+    path("category/edit/<int:pk>" , views.UpdateCategoryView.as_view()),
+
 ]
 urlpatterns+=router.urls

@@ -61,6 +61,8 @@ class CommentDetailSerializer(serializers.ModelSerializer):
 
 #Category Serializers
 class categoryCreateSerializer(serializers.ModelSerializer): 
+    # id = serializers.IntegerField(required=False)
+
     
     class Meta:
         model=models.Category
