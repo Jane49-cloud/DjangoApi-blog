@@ -6,7 +6,7 @@ from . import serializers, models
 
 
 class CreateBlogView(generics.CreateAPIView):
-    serializer_class = serializers.BlogSerializer
+    serializer_class = serializers.BlogCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     
@@ -26,7 +26,7 @@ class AllBlogsListView(generics.ListAPIView):
 
 class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=serializers.BlogDetailSerializer
-    queryset = models.Blog.objects.filter(published=True)
+    queryset = models.Blog.objects.all()
 
 
 
