@@ -25,7 +25,7 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=False)
-    image=models.ImageField(upload_to='blog-post-image')
+    image=models.ImageField(upload_to='blog-post-image', blank=True)
     description = models.TextField(blank=True)
     
 

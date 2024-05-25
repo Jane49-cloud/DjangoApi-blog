@@ -105,6 +105,7 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Blog
         fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published" , "image"]
+        optional_fields = ['image ']
 
 
         
@@ -115,6 +116,11 @@ class BlogSerializer(serializers.ModelSerializer):
         # request =self.context.get('request')
         self.Meta.depth =1 # depth means it will go  one level in the relative model
 
+    def validate_image(self, value):
+        # Ensure that if no new image is uploaded, the current image is retained
+        if self.instance and self.instance.image and not value:
+            return self.instance.image
+        return value
 
     def create(self, validated_data):
         category = validated_data.pop('category')
@@ -125,16 +131,28 @@ class BlogSerializer(serializers.ModelSerializer):
 class BlogDetailSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     id = serializers.CharField()
+    author = AuthorSerializer()
 
     class Meta:
         model = models.Blog
-        fields = ['title', 'id', 'author', 'created_at', 'category', 'description', 'comments', 'published', 'content']
+        fields = ['title', 'id', 'author', 'created_at', 'category', 'description', 'comments', 'published', 'content', 'image']
         depth = 1
+        optional_fields = ["image"]
 
-    def __init__(self, *args, **kwargs):
-        super(BlogDetailSerializer, self).__init__(*args, **kwargs)
-        # request =self.context.get('request')
-        self.Meta.depth =1
+    def validate_image(self, value):
+        # Ensure that if no new image is uploaded, the current image is retained
+        if self.instance and self.instance.image and not value:
+            return self.instance.image
+        return value
+
+    def to_representation(self, instance):
+        # Convert the image field to a URL if it's a FileField
+        ret = super().to_representation(instance)
+        request = self.context.get('request')
+        if request:
+            ret['image'] = request.build_absolute_uri(instance.image.url)
+        return ret
+
 
 
 
