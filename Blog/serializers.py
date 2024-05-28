@@ -82,17 +82,7 @@ class CategorySerializer(serializers.ModelSerializer):
         self.Meta.depth =1 # depth means it will go  one level in the relative model
 
 
-class CategoryDetailSerializer(serializers.ModelSerializer):
-    id = serializers.CharField(source='pk') 
-   
-    class Meta:
-        model=models.Category
-        fields=["id", 'name', 'description']
 
-    def __init__(self, *args, **kwargs):
-        super(CategoryDetailSerializer, self).__init__(*args, **kwargs)
-        # request =self.context.get('request')
-        self.Meta.depth =1
 
 #Blog Serializers
 
@@ -139,7 +129,7 @@ class BlogSerializer(serializers.ModelSerializer):
 class BlogDetailSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     id = serializers.CharField()
-    author = AuthorSerializer()
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = models.Blog
@@ -160,10 +150,28 @@ class BlogDetailSerializer(serializers.ModelSerializer):
         if request:
             ret['image'] = request.build_absolute_uri(instance.image.url)
         return ret
+    
+
+    def update(self, instance, validated_data):
+        # Exclude author field from update
+        validated_data.pop('author', None)
+        return super().update(instance, validated_data)
 
 
 
 
 
+class CategoryDetailSerializer(serializers.ModelSerializer):
+    category_blogs = BlogSerializer(many=True, read_only=True)
+    id = serializers.CharField(source='pk') 
+   
+    class Meta:
+        model=models.Category
+        fields=["id", 'name', 'description', "category_blogs"]
+
+    def __init__(self, *args, **kwargs):
+        super(CategoryDetailSerializer, self).__init__(*args, **kwargs)
+        # request =self.context.get('request')
+        self.Meta.depth =1
 
 
