@@ -57,8 +57,8 @@ def test_update_blog():
     assert response.json()["title"] == "Updated Blog Title"
 
 def test_delete_blog():
-    blog_id = "971738871118364673"
-    url = "http://127.0.0.1:8000/api/blogs/972555722786177025"
+    blog_id = "972559111295860737"
+    url = "http://127.0.0.1:8000/api/blogs/972557278173921281"
     headers = {
         "Authorization": "JWT  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE5NDU1ODg0LCJpYXQiOjE3MTY4NjM4ODQsImp0aSI6IjNiOGE5ODdkODU3ODRmYjlhZDZkMGY4OWZiNWRkMmRkIiwidXNlcl9pZCI6OTcwNDU4OTgyNjYwNDA3Mjk3fQ.dgp6L7Tyy4RYuNlRYJPufHsZgjE7JpHtZJWnF7nONnY"  # Replace with a valid token
     }
