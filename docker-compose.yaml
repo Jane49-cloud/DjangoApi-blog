@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: cockroachdb/cockroach:v21.1.7
+    container_name: cockroachdb
+    command: start-single-node --insecure
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    volumes:
+      - cockroach-data:/cockroach/cockroach-data
+
+  web:
+    build: .
+    container_name: django
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_NAME=eleliafrika_blog
+      - DATABASE_USER=ayub
+      - DATABASE_PASSWORD=lLdpi5J_RYvM7ynnXY3Omw
+      - DATABASE_HOST=db
+      - DATABASE_PORT=26257
+      - CLOUDINARY_CLOUD_NAME=dbmt0nuvr
+      - CLOUDINARY_API_KEY=791899511471149
+      - CLOUDINARY_API_SECRET=DByO36QLHnSPVEcWrbh-jEJG4U4
+
+volumes:
+  cockroach-data:
