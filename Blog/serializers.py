@@ -90,7 +90,7 @@ class BlogCreateSerializer(serializers.ModelSerializer):
     # id = serializers.CharField(source='pk') 
     class Meta:
         model=models.Blog
-        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published" , "image"]
+        fields=[ 'title', 'id', 'author', 'created_at', 'category' ,'description' , "published" , "image" , 'content']
 
 
 class BlogSerializer(serializers.ModelSerializer):
