@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'Apis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_cockroachdb',
-        'NAME': 'eleliafrika_blog',  # Database name
-        'USER': 'ayub',  # Database user
-        'PASSWORD': 'lLdpi5J_RYvM7ynnXY3Omw',  # Password
-        'HOST': 'developement-8482.7tc.aws-eu-central-1.cockroachlabs.cloud',  # Hostname
-        'PORT': '26257',  # Port
-       
+        'NAME': 'DjangoBlogs', 
+        'USER': 'ndirangu',  
+        'PASSWORD': 'wdFCd97K-lASYI9lO2Qr6g',  
+        'HOST': 'shady-reptile-7995.8nj.gcp-europe-west1.cockroachlabs.cloud',  
+        'PORT': '26257', 
+        
     }
 }
 
