@@ -53,7 +53,7 @@ class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
 class UpdateCategoryView(generics.UpdateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]s
 
 class AuthorListView(generics.ListAPIView):
     serializer_class = AuthorSerializer
